@@ -8,14 +8,12 @@ main = Blueprint('main', __name__)
 def home():
     if request.method == "POST":
         url = request.form.get("url")
-        #parsed_url = feedparser.parse(url)
         session['url'] = url
         return redirect(url_for("main.feed"))
     return render_template("home.html")
 
 @main.route("/feed", methods=['GET', 'POST'])
 def feed():
-    titles = []
     if request.method == "GET":
         url=session.get("url",None)
         parsed_url = feedparser.parse(url)
