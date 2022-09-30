@@ -3,17 +3,25 @@ import feedparser
 
 main = Blueprint('main', __name__)
 
-@main.route("/", methods=['GET', 'POST',])
-@main.route("/home",methods=['GET', 'POST',])
+@main.route("/", methods=['GET', 'POST'])
+@main.route("/home",methods=['GET', 'POST'])
 def home():
     if request.method == "POST":
         url = request.form.get("url")
         #parsed_url = feedparser.parse(url)
         session['url'] = url
+        return redirect(url_for("main.feed"))
     return render_template("home.html")
 
-@main.route("/feed",methods=['GET', 'POST',])
+@main.route("/feed", methods=['GET', 'POST'])
 def feed():
+    titles = []
     if request.method == "GET":
-        print("It's working!")
-    return render_template("feed.html")
+        url=session.get("url",None)
+        parsed_url = feedparser.parse(url)
+        entries = parsed_url.entries
+    elif request.method == "POST":
+        url = request.form.get("url")
+        session['url'] = url
+        return redirect(url_for("main.feed"))
+    return render_template("feed.html", entries=entries)
