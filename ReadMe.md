@@ -11,4 +11,4 @@ To run the app, create the environment.yml
 ```
 
 ## Hosted on Heroku
-You can also visualize the app by clicking the following link: https://devproj-rssfeedreader.herokuapp.com/feed
+You can also visualize the app by clicking the following link: https://devproj-rssfeedreader.herokuapp.com
