@@ -1,13 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <div class="p-4 p-md-5 mb-4 rounded bg-light">
+<div class="container py-6">
+  <div class="row align-items-md-stretch">
+    <div class="col-md-15">
+      <div class="h-100 p-5 bg-light border rounded-3">
     <h2 class="text-center">Results</h2>
     <br>
     <table id="myTable" class="table">
       <thead>
         <tr>
           <th scope="col">Title</th>
+          <th scope="col">Date</th>
           <th scope="col">Description</th>
           <th scope="col">Link</th>
         </tr> 
@@ -16,6 +19,7 @@
           {% for post in entries %}
         <tr>
           <td>{{ post['title'] }}</td>
+          <td>{{ post['published'][0:16] }}</td>
           <td>{{ post['description'] }}</td>
           <td><a href={{ post['link'] }}>{{ post['link'] }}</a></td>
         </tr>

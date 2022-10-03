@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, redirect, url_for, session
+from flask import render_template, Blueprint, request, redirect, url_for, session, flash
 import feedparser
 
 main = Blueprint('main', __name__)
@@ -18,6 +18,8 @@ def feed():
         url=session.get("url",None)
         parsed_url = feedparser.parse(url)
         entries = parsed_url.entries
+        if len(entries) == 0:
+            flash("No feed to show! Please enter another URL!")
     elif request.method == "POST":
         url = request.form.get("url")
         session['url'] = url
